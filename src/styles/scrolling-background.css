@@ -1,0 +1,49 @@
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scrolling-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.scrolling-content {
+  display: flex;
+  height: 100%;
+  animation: scroll 60s linear infinite;
+  /* Prevent animation during reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.scrolling-image {
+  flex: 0 0 33.333%;
+  min-width: 33.333%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+/* Fallback styles for browsers that don't support animations */
+@supports not (animation: scroll) {
+  .scrolling-content {
+    display: block;
+  }
+  
+  .scrolling-image:first-child {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .scrolling-image:not(:first-child) {
+    display: none;
+  }
+}
